@@ -7,6 +7,8 @@ from torch.utils.data import DataLoader
 import pytorch_lightning as pl
 from torch.utils.data import random_split
 from pytorch_lightning.metrics.functional import accuracy
+from pathlib import Path
+
 
 class LitModel(pl.LightningModule):
 
@@ -45,6 +47,8 @@ if __name__ == '__main__':
     parser.add_argument('--max_epochs', type=int, default=10)
     parser.add_argument('--data_dir', type=str, default=os.getcwd())
     args = parser.parse_args()
+
+    Path("mydummyfile.txt").touch()
 
     dataset = MNIST(args.data_dir, download=True, transform=transforms.ToTensor())
     train_loader = DataLoader(dataset, batch_size=args.batch_size)
